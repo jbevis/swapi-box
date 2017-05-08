@@ -22,3 +22,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.scroller-cards-holder {
+  display: flex;
+}
+
+.scroller {
+  max-width: 25vw;
+  padding: 20px;
+}

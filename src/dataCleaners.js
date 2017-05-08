@@ -6,17 +6,17 @@ export const crawlCleaner = (obj) => {
   })
 }
 
+const findPlanetName = (url) => {}
+const findSpecies = (url) => {}
 
 export const peopleDataCleaner = (obj) => {
   return obj.results.map(person => {
+    let homeworld = person.homeworld;
+    let species = person.species;
     return { name: person.name,
-             homeworld: {findPlanetName(person.homeworld)},
-             species: {findSpecies(person.species)},
-             popOfHomeworld: {}
+             homeworld: `${findPlanetName(homeworld)}`,
+             species: `${findSpecies(species)}`,
+             population: {}
             }
   })
-}
-
-findPlanetName(url) {
-
 }

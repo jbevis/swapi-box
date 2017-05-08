@@ -23,12 +23,16 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const filmApi = 'http://www.swapi.co/api/films'
-    fetch(filmApi).then((data) => {
-      this.setCrawlState(data)
-    }).catch((error) => {
-      alert('film api busted')
-    })
+    const filmApi = 'http://www.swapi.co/api/films';
+    fetch(filmApi)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data.results);
+        this.setCrawlState(data)
+      })
+      .catch((error) => {
+        alert('film api busted')
+      })
   }
 
   render() {
@@ -38,15 +42,17 @@ class App extends Component {
           <h2>SWAPI-Box</h2>
           <Button />
         </header>
-        <section>
-          <Scroller crawlText={this.state.movieCrawls}/>
+        <section className='scroller-cards-holder'>
+          <article className='scroller'>
+            <Scroller crawlText={this.state.movieCrawls}/>
+          </article>
+          <article className='buttons'>
+            <Button />
+            <Button />
+            <Button />
+          </article>
+          <CardGrid />
         </section>
-        <section className='buttons'>
-          <Button />
-          <Button />
-          <Button />
-        </section>
-        <CardGrid />
       </main>
     );
   }

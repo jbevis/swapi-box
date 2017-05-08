@@ -1,7 +1,5 @@
 export const crawlCleaner = (obj) => {
-  console.log('Still cleaning...');
   return obj.results.map(movie => {
-    console.log('Cleaned a bit');
     return {text: movie.opening_crawl,
             title: movie.title,
             year: movie.release_date}

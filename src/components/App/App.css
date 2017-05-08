@@ -28,6 +28,6 @@
 }
 
 .scroller {
-  max-width: 25vw;
+  width: 25vw;
   padding: 20px;
 }

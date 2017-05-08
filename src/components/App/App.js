@@ -18,17 +18,15 @@ class App extends Component {
   }
 
   setCrawlState(dataObj) {
-    console.log('Cleaning data...');
     let cleanCrawlData = crawlCleaner(dataObj);
     this.setState({movieCrawls: cleanCrawlData})
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const filmApi = 'http://www.swapi.co/api/films';
     fetch(filmApi)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log('Got the data!');
         console.log(data.results);
         this.setCrawlState(data)
       })

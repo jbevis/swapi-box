@@ -4,6 +4,7 @@ import { Button } from '../Button/Button';
 import { CardGrid } from '../CardGrid/CardGrid';
 import { Scroller } from '../Scroller/Scroller';
 import { crawlCleaner } from '../../dataCleaners.js'
+import { peopleCleaner } from '../../dataCleaners.js'
 
 class App extends Component {
   constructor () {
@@ -22,6 +23,11 @@ class App extends Component {
     this.setState({movieCrawls: cleanCrawlData})
   }
 
+  setPeopleState(obj) {
+    let cleanPeopleData = peopleCleaner(obj);
+    this.setState({people: cleanPeopleData});
+  }
+
   componentWillMount() {
     const filmApi = 'http://www.swapi.co/api/films';
     fetch(filmApi)
@@ -33,6 +39,13 @@ class App extends Component {
       .catch((error) => {
         alert('film api busted')
       })
+
+      const peopleApi = 'http://www.swapi.co/api/people';
+      fetch(peopleApi)
+        .then(resp => resp.json())
+        .then((people) => {
+          this.setPeopleState(people)
+        })
   }
 
   render() {

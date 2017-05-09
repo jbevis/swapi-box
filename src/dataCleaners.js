@@ -9,14 +9,29 @@ export const crawlCleaner = (obj) => {
 const findPlanetName = (url) => {}
 const findSpecies = (url) => {}
 
-export const peopleDataCleaner = (obj) => {
-  return obj.results.map(person => {
-    let homeworld = person.homeworld;
-    let species = person.species;
-    return { name: person.name,
-             homeworld: {findPlanetName(homeworld)},
-             species: {findSpecies(species)},
-             population: {}
-            }
-  })
+export const peopleCleaner = (obj) => {
+  return obj.results.reduce((acc, person) => {
+    if(!acc[person.name]) {
+      acc[person.name] = {};
+      acc[person.name].name = person.name;
+
+      fetch(person.homeworld)
+        .then(resp => resp.json())
+        .then(world => acc[person.name].homeworld = world.name)
+        .catch(() => 'error')
+
+      fetch(person.homeworld)
+        .then(resp => resp.json())
+        .then(world => acc[person.name].population = world.population)
+        .catch(() => 'error')
+
+      fetch(person.species)
+        .then(resp => resp.json())
+        .then(species => acc[person.name].species = species.name)
+        .catch(() => 'error')
+
+    }
+    console.log(acc)
+    return acc
+  }, {})
 }

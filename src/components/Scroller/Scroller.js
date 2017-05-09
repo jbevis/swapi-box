@@ -24,3 +24,8 @@ export const Scroller = ({ crawlText }) => {
     </article>
   )
 }
+
+const { array } = React.PropTypes
+Scroller.propTypes = {
+  crawlText: array.isRequired
+}

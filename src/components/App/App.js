@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     return (
-      <main className="App">
+      <main id="App">
         <header className="App-header">
           <h2>SWAPI-Box</h2>
           <Button />

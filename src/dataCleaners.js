@@ -14,8 +14,8 @@ export const peopleDataCleaner = (obj) => {
     let homeworld = person.homeworld;
     let species = person.species;
     return { name: person.name,
-             homeworld: `${findPlanetName(homeworld)}`,
-             species: `${findSpecies(species)}`,
+             homeworld: {findPlanetName(homeworld)},
+             species: {findSpecies(species)},
              population: {}
             }
   })

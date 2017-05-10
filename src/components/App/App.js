@@ -50,26 +50,46 @@ class App extends Component {
         alert('film api busted')
       })
 
-      const peopleApi = 'http://www.swapi.co/api/people';
-      fetch(peopleApi)
-        .then(resp => resp.json())
-        .then((people) => {
-          this.setPeopleState(people)
-        })
+    const peopleApi = 'http://www.swapi.co/api/people';
+    fetch(peopleApi)
+      .then(resp => resp.json())
+      .then((people) => {
+        this.setPeopleState(people)
+      })
 
-      const planetApi = 'http://www.swapi.co/api/planets';
-      fetch(planetApi)
-        .then((resp) => resp.json())
-        .then((planets) => {
-          this.setPlanetState(planets)
-        })
+    const planetApi = 'http://www.swapi.co/api/planets';
+    fetch(planetApi)
+      .then((resp) => resp.json())
+      .then((planets) => {
+        this.setPlanetState(planets)
+      })
 
-      const vehicleApi = 'http://www.swapi.co/api/vehicles';
-      fetch(vehicleApi)
-        .then((resp) => resp.json())
-        .then((vehicles) => {
-          this.setVehicleState(vehicles)
-        })
+    const vehicleApi = 'http://www.swapi.co/api/vehicles';
+    fetch(vehicleApi)
+      .then((resp) => resp.json())
+      .then((vehicles) => {
+        this.setVehicleState(vehicles)
+      })
+  }
+
+  handleClickFaves() {
+    let data = this.state.favorites;
+    this.setState({dataToDisplay: data})
+  }
+
+  handleClickPeople() {
+    let data = this.state.people;
+    this.setState({dataToDisplay: data})
+  }
+
+  handleClickPlanets() {
+    let data = this.state.planets;
+    this.setState({dataToDisplay: data})
+  }
+
+  handleClickVehicles() {
+    let data = this.state.vehicles;
+    this.setState({dataToDisplay: data})
   }
 
   render() {
@@ -77,18 +97,22 @@ class App extends Component {
       <main id="App">
         <header className="App-header">
           <h2>SWAPI-Box</h2>
-          <Button name='Favorites' />
+          <Button name='Favorites'
+                  onClick={this.handleClickFaves.bind(this)} />
         </header>
         <section className='scroller-cards-holder'>
           <article className='scroller'>
             <Scroller crawlText={this.state.movieCrawls}/>
           </article>
           <article className='buttons'>
-            <Button name='people' />
-            <Button name='planets' />
-            <Button name='vehicles' />
+            <Button name='people'
+                    onClick={this.handleClickPeople.bind(this)}/>
+            <Button name='planets'
+                    onClick={this.handleClickPlanets.bind(this)} />
+            <Button name='vehicles'
+                    onClick={this.handleVehicles.bind(this)} />
           </article>
-          <CardGrid />
+          <CardGrid data={this.state.dataToDisplay} />
         </section>
       </main>
     );

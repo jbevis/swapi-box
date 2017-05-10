@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const CardGrid = () => {
+export const CardGrid = ({ data = {} }) => {
   return (
     <section className='card-grid'>
-      Cards should go here
+      {Object.keys(data).map((key, index) => {
+        // data[key].map(())
+      })}
     </section>
   )
 }

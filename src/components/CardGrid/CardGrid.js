@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const CardGrid = () => {
+export const CardGrid = ({ data = {} }) => {
   return (
     <section className='card-grid'>
-      Cards should go here
+      <div>Cards will go here</div>
     </section>
   )
 }

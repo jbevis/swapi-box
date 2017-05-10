@@ -3,8 +3,8 @@ import './App.css';
 import { Button } from '../Button/Button';
 import { CardGrid } from '../CardGrid/CardGrid';
 import { Scroller } from '../Scroller/Scroller';
-import { crawlCleaner } from '../../dataCleaners.js'
-import { peopleCleaner, planetCleaner, vehicleCleaner } from '../../dataCleaners.js'
+import { crawlCleaner } from '../../dataCleaners/dataCleaners.js'
+import { peopleCleaner, planetCleaner, vehicleCleaner } from '../../dataCleaners/dataCleaners.js'
 
 export default class App extends Component {
   constructor () {
@@ -121,11 +121,12 @@ export default class App extends Component {
   }
 
   render() {
-    if (  !Object.keys(this.state.people).length &&
-          !Object.keys(this.state.planets).length &&
-          !Object.keys(this.state.vehicles).length) {
+    if (  !Object.keys(this.state.people).length ||
+          !Object.keys(this.state.planets).length ||
+          !Object.keys(this.state.vehicles).length ||
+          !this.state.movieCrawls.length ){
       return (
-        <div>Loading, please wait</div>
+        <div className='loading-message'>Loading, please wait</div>
       )
     } else {
     return (

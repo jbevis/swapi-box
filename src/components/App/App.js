@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 import { CardGrid } from '../CardGrid/CardGrid';
 import { Scroller } from '../Scroller/Scroller';
 import { crawlCleaner } from '../../dataCleaners.js'
-import { peopleCleaner, planetCleaner } from '../../dataCleaners.js'
+import { peopleCleaner, planetCleaner, vehicleCleaner } from '../../dataCleaners.js'
 
 class App extends Component {
   constructor () {
@@ -34,6 +34,11 @@ class App extends Component {
     this.setState({planets: cleanPlanetData});
   }
 
+  setVehicleState(dataObj) {
+    let cleanVehicleData = vehicleCleaner(dataObj);
+    this.setState({vehicles: cleanVehicleData});
+  }
+
   componentWillMount() {
     const filmApi = 'http://www.swapi.co/api/films';
     fetch(filmApi)
@@ -57,6 +62,13 @@ class App extends Component {
         .then((resp) => resp.json())
         .then((planets) => {
           this.setPlanetState(planets)
+        })
+
+      const vehicleApi = 'http://www.swapi.co/api/vehicles';
+      fetch(vehicleApi)
+        .then((resp) => resp.json())
+        .then((vehicles) => {
+          this.setVehicleState(vehicles)
         })
   }
 

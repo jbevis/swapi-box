@@ -8,7 +8,7 @@ export const crawlCleaner = (obj) => {
 
 export const peopleCleaner = (obj) => {
   return obj.results.reduce((acc, person) => {
-    if(!acc[person.name]) {
+    if (!acc[person.name]) {
       acc[person.name] = {};
       acc[person.name].name = person.name;
 
@@ -49,9 +49,22 @@ export const planetCleaner = (obj) => {
             .then(resident => {
               acc[planet.name].residents.push(resident.name)})
             .catch(() => 'error')
-            })
-        }
+        })
       }
+    }
     return acc
   }, {})
 }
+
+export const vehicleCleaner = (obj) => {
+  return obj.results.reduce((acc, vehicle) => {
+    if (!acc[vehicle.name]) {
+      acc[vehicle.name] = {};
+      acc[vehicle.name].name = vehicle.name;
+      acc[vehicle.name].model = vehicle.model;
+      acc[vehicle.name].class = vehicle.vehicle_class;
+      acc[vehicle.name].passengers = vehicle.passengers;
+    }
+    return acc
+  }, {});
+};

@@ -1,7 +1,9 @@
 import React from 'react';
 
-export const Button = () => {
+export const Button = ({ name = 'button' }) => {
   return (
-    <button>people</button>
+    <button className={name}>
+      {name.toUpperCase()}
+    </button>
   )
 }

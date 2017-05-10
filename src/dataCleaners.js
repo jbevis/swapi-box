@@ -6,9 +6,6 @@ export const crawlCleaner = (obj) => {
   })
 }
 
-const findPlanetName = (url) => {}
-const findSpecies = (url) => {}
-
 export const peopleCleaner = (obj) => {
   return obj.results.reduce((acc, person) => {
     if(!acc[person.name]) {
@@ -29,9 +26,32 @@ export const peopleCleaner = (obj) => {
         .then(resp => resp.json())
         .then(species => acc[person.name].species = species.name)
         .catch(() => 'error')
-
     }
-    console.log(acc)
+    return acc
+  }, {})
+}
+
+export const planetCleaner = (obj) => {
+  return obj.results.reduce((acc, planet) => {
+    if(!acc[planet.name]) {
+      acc[planet.name] = {};
+      acc[planet.name].name = planet.name;
+      acc[planet.name].terrain = planet.terrain;
+      acc[planet.name].population = planet.population;
+      acc[planet.name].residents = [];
+
+      if (!planet.residents.length) {
+        acc[planet.name].residents = 'no residents';
+      } else {
+        planet.residents.forEach((residentURL) => {
+          fetch(residentURL)
+            .then(resp => resp.json())
+            .then(resident => {
+              acc[planet.name].residents.push(resident.name)})
+            .catch(() => 'error')
+            })
+        }
+      }
     return acc
   }, {})
 }

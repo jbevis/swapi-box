@@ -92,6 +92,22 @@ class App extends Component {
     this.setState({dataToDisplay: data})
   }
 
+  handleAddFaves(i) {
+    console.log('clicked!!!!!');
+    console.log(i)
+    let objKeys = Object.keys(this.state.dataToDisplay)
+    console.log(objKeys)
+    let faveKey = objKeys[i]
+    console.log(faveKey)
+    let faveObj = {[faveKey]: this.state.dataToDisplay[faveKey]}
+    console.log(faveObj)
+
+    let newObj = {}
+    let assignObj = Object.assign(newObj, this.state.favorites)
+    let addNewObj = Object.assign(assignObj, faveObj)
+    this.setState({favorites: addNewObj})
+  }
+
   render() {
     return (
       <main id="App">
@@ -116,7 +132,8 @@ class App extends Component {
                     onClick={this.handleClickVehicles.bind(this)}
                     counter='none' />
           </article>
-          <CardGrid data={this.state.dataToDisplay} />
+          <CardGrid data={this.state.dataToDisplay}
+                    faveClick={this.handleAddFaves.bind(this)}/>
         </section>
       </main>
     );

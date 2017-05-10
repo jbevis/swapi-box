@@ -1,8 +1,14 @@
 import React from 'react';
 
-export const Card = ({ index, data }) => {
+export const Card = ({ id, data, faveClick }) => {
   return(
     <div className='card'>
+      <button className='markFavorite'
+              onClick={ () => { faveClick(id) } }
+              id={id}>
+        &#9734;
+      </button>
+
       {Object.keys(data).map((key, index) => {
         if (typeof data[key] === 'string') {
           return (

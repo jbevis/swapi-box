@@ -98,7 +98,8 @@ class App extends Component {
         <header className="App-header">
           <h2>SWAPI-Box</h2>
           <Button name='Favorites'
-                  onClick={this.handleClickFaves.bind(this)} />
+                  onClick={this.handleClickFaves.bind(this)}
+                  counter={Object.keys(this.state.favorites).length}/>
         </header>
         <section className='scroller-cards-holder'>
           <article className='scroller'>
@@ -106,11 +107,14 @@ class App extends Component {
           </article>
           <article className='buttons'>
             <Button name='people'
-                    onClick={this.handleClickPeople.bind(this)}/>
+                    onClick={this.handleClickPeople.bind(this)}
+                    counter='none' />
             <Button name='planets'
-                    onClick={this.handleClickPlanets.bind(this)} />
+                    onClick={this.handleClickPlanets.bind(this)}
+                    counter='none' />
             <Button name='vehicles'
-                    onClick={this.handleVehicles.bind(this)} />
+                    onClick={this.handleClickVehicles.bind(this)}
+                    counter='none' />
           </article>
           <CardGrid data={this.state.dataToDisplay} />
         </section>

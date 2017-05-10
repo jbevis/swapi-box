@@ -6,7 +6,7 @@ import { Scroller } from '../Scroller/Scroller';
 import { crawlCleaner } from '../../dataCleaners.js'
 import { peopleCleaner, planetCleaner, vehicleCleaner } from '../../dataCleaners.js'
 
-class App extends Component {
+export default class App extends Component {
   constructor () {
     super()
     this.state = {
@@ -39,7 +39,7 @@ class App extends Component {
     this.setState({vehicles: cleanVehicleData});
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const filmApi = 'http://www.swapi.co/api/films';
     fetch(filmApi)
       .then((resp) => resp.json())
@@ -83,6 +83,8 @@ class App extends Component {
   }
 
   handleClickPlanets() {
+    console.log('clicked')
+    console.log(this.state.planets)
     let data = this.state.planets;
     this.setState({dataToDisplay: data})
   }
@@ -119,6 +121,13 @@ class App extends Component {
   }
 
   render() {
+    if (  !Object.keys(this.state.people).length &&
+          !Object.keys(this.state.planets).length &&
+          !Object.keys(this.state.vehicles).length) {
+      return (
+        <div>Loading, please wait</div>
+      )
+    } else {
     return (
       <main id="App">
         <header className="App-header">
@@ -148,6 +157,7 @@ class App extends Component {
       </main>
     );
   }
+  }
 }
 
-export default App;
+// export default App;

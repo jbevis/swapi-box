@@ -14,7 +14,7 @@ export const Button = ({ name = 'button', onClick, counter = '' }) => {
 
   return (
     <button className={name}
-            onClick={onClick}>
+            onClick={ onClick} >
       {name.toUpperCase()}
       {showCount}
     </button>

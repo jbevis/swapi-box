@@ -93,19 +93,29 @@ class App extends Component {
   }
 
   handleAddFaves(i) {
-    console.log('clicked!!!!!');
-    console.log(i)
     let objKeys = Object.keys(this.state.dataToDisplay)
-    console.log(objKeys)
     let faveKey = objKeys[i]
-    console.log(faveKey)
     let faveObj = {[faveKey]: this.state.dataToDisplay[faveKey]}
-    console.log(faveObj)
+    let favoritesKeys = Object.keys(this.state.favorites);
 
-    let newObj = {}
-    let assignObj = Object.assign(newObj, this.state.favorites)
-    let addNewObj = Object.assign(assignObj, faveObj)
-    this.setState({favorites: addNewObj})
+    if (!favoritesKeys.includes(faveKey)) {
+      let newObj = {}
+      let assignObj = Object.assign(newObj, this.state.favorites)
+      let addNewObj = Object.assign(assignObj, faveObj)
+
+      this.setState({favorites: addNewObj})
+    } else {
+      let remainingFaves = favoritesKeys.filter(key => {
+        return key !== faveKey
+      })
+      console.log(remainingFaves)
+      let remainingFaveObjs = remainingFaves.reduce((acc, key) => {
+        acc[key] = this.state.favorites[key]
+        return acc
+      }, {})
+
+      this.setState({favorites: remainingFaveObjs})
+    }
   }
 
   render() {

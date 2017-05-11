@@ -12,11 +12,11 @@ export const Card = ({ id, data, faveClick }) => {
       {Object.keys(data).map((key, index) => {
         if (typeof data[key] === 'string') {
           return (
-            <p key={index}>{key.toUpperCase()}: {data[key]}</p>
+            <p key={index} className='card-text'>{key.toUpperCase()}: {data[key]}</p>
           )
         } else {
           return (
-            <p key={index}>{key.toUpperCase()}: &nbsp;
+            <p key={index} className='card-text'>{key.toUpperCase()}: &nbsp;
               {data[key].map((resident, index) => {
                 if (data[key].length > 1) {
                   return (

@@ -1,3 +1,23 @@
+p {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.loading-message {
+  background: url('http://vignette1.wikia.nocookie.net/disney-infinity/images/7/7a/The_Force_Awakens_DI_Playset_01.png/revision/latest?cb=20151125190114') no-repeat fixed;
+  background-size: cover;
+  height: 100vh;
+}
+
+.loading-image {
+  display: block;
+  margin: auto;
+}
+
+.loading-text {
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
@@ -9,25 +29,107 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 15vh;
+  text-align: center;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-content: middle;
+}
+
+.Favorites {
+  display: inline;
+  height: 60px;
+  width: 250px;
+  border-radius: 30px;
+}
+
+h2 {
+  display: inline;
+  font-size: 50px;
+  line-height: 0;
   color: white;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .scroller-cards-holder {
+  min-height: 85vh;
   display: flex;
+  background: url('http://image1.redbull.com/rbcom/010/2015-12-27/1331767414211_2/0010/1/1500/1000/2/star-wars-spaceships-death-star.jpg')no-repeat fixed;
+  background-size: cover;
 }
 
 .scroller {
   width: 25vw;
   padding: 20px;
+}
+
+.crawl {
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 185%;
+}
+
+.scroller-title {
+  font-weight: 400;
+}
+
+.button-cards-holder {
+  width: 75vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  background-color: #00164f;
+  color: white;
+  margin: 20px;
+}
+
+button:hover {
+  background-color: #16448e;
+  border-top-color: #ffffff;
+  border-right-color: #d1a849;
+  border-bottom-color: #d1a849;
+  border-left-color: #ffffff;
+}
+
+.clicked {
+  background-color: #022b93;
+  border-color: white;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.empty-grid {
+  text-align: center;
+}
+
+.card {
+  width: 300px;
+  border-radius: 30px;
+  border: 5px solid rgba(255, 255, 255, .4);
+  background-color: rgba(0, 0, 0, .4);
+  margin: 10px;
+}
+
+.markFavorite {
+  padding: 10px 16px;
+}
+
+.card-text {
+  margin: 25px;
 }

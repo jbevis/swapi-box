@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Button = ({ name = 'button', onClick, counter = '' }) => {
 
-  const showCount = () => {
+  const showCount = (counter) => {
     if (typeof counter === 'number') {
       return (
         <div className='counter'>
@@ -16,7 +16,7 @@ export const Button = ({ name = 'button', onClick, counter = '' }) => {
     <button className={name}
             onClick={ onClick} >
       {name.toUpperCase()}
-      {showCount}
+      {showCount(counter)}
     </button>
   )
 }

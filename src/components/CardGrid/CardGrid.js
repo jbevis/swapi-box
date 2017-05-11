@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './Card/Card';
 
-export const CardGrid = ({ data = {}, faveClick }) => {
+export const CardGrid = ({ data = {}, faveClick, favorites }) => {
   if (Object.keys(data).length) {
     return (
       <section className='card-grid'>
@@ -10,7 +10,9 @@ export const CardGrid = ({ data = {}, faveClick }) => {
               <Card key={index}
                     id={index}
                     data={data[key]}
-                    faveClick={faveClick}/>
+                    keyName={key}
+                    faveClick={faveClick}
+                    favoritesData={favorites} />
             )
           })
         }

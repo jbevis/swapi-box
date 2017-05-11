@@ -92,7 +92,7 @@ export default class App extends Component {
     this.setState({dataToDisplay: data})
   }
 
-  handleAddFaves(i) {
+  handleToggleFaves(i) {
     let objKeys = Object.keys(this.state.dataToDisplay)
     let faveKey = objKeys[i]
     let faveObj = {[faveKey]: this.state.dataToDisplay[faveKey]}
@@ -108,13 +108,13 @@ export default class App extends Component {
       let remainingFaves = favoritesKeys.filter(key => {
         return key !== faveKey
       })
-      console.log(remainingFaves)
       let remainingFaveObjs = remainingFaves.reduce((acc, key) => {
         acc[key] = this.state.favorites[key]
         return acc
       }, {})
 
-      this.setState({favorites: remainingFaveObjs})
+      this.setState({favorites: remainingFaveObjs});
+      this.setState({dataToDisplay: remainingFaveObjs});
     }
   }
 
@@ -155,7 +155,8 @@ export default class App extends Component {
                       counter='none' />
             </article>
             <CardGrid data={this.state.dataToDisplay}
-                      faveClick={this.handleAddFaves.bind(this)}/>
+                      faveClick={this.handleToggleFaves.bind(this)}
+                      favorites={this.state.favorites} />
           </article>
         </section>
       </main>

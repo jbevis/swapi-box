@@ -75,8 +75,8 @@ describe.skip('App --> mount',() => {
     const found = wrapper.find(".App-header")
 
     await promise;
-    // console.log(found)
-    expect(found).toHaveLength(1)
+    console.log(found)
+    expect(found.length).toBe(1)
   })
 
 

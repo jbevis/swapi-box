@@ -1,9 +1,17 @@
 import React from 'react';
 
-export const Card = ({ id, data, faveClick }) => {
+export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
+  const checkIfFavorited = (key) => {
+    let favoriteClass = '';
+    if (Object.keys(favoritesData).includes(key)) {
+      favoriteClass = 'favorite';
+    }
+    return favoriteClass;
+  };
+
   return(
     <div className='card'>
-      <button className='markFavorite'
+      <button className={checkIfFavorited(keyName)}
               onClick={ () => { faveClick(id) } }
               id={id}>
         &#9734;

@@ -155,7 +155,8 @@ export default class App extends Component {
                       counter='none' />
             </article>
             <CardGrid data={this.state.dataToDisplay}
-                      faveClick={this.handleAddFaves.bind(this)}/>
+                      faveClick={this.handleAddFaves.bind(this)}
+                      favorites={this.state.favorites} />
           </article>
         </section>
       </main>

@@ -7,6 +7,7 @@ p {
   background: url('http://vignette1.wikia.nocookie.net/disney-infinity/images/7/7a/The_Force_Awakens_DI_Playset_01.png/revision/latest?cb=20151125190114') no-repeat fixed;
   background-size: cover;
   height: 100vh;
+  text-align: center;
 }
 
 .loading-image {
@@ -95,17 +96,12 @@ button {
   margin: 20px;
 }
 
-button:hover {
+button:focus {
   background-color: #16448e;
   border-top-color: #ffffff;
   border-right-color: #d1a849;
   border-bottom-color: #d1a849;
   border-left-color: #ffffff;
-}
-
-.clicked {
-  background-color: #022b93;
-  border-color: white;
 }
 
 .card-grid {
@@ -128,6 +124,11 @@ button:hover {
 
 .markFavorite {
   padding: 10px 16px;
+}
+
+.favorite {
+  background-color: #49af1d;
+  border-color: white;
 }
 
 .card-text {

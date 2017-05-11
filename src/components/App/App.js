@@ -83,8 +83,6 @@ export default class App extends Component {
   }
 
   handleClickPlanets() {
-    console.log('clicked')
-    console.log(this.state.planets)
     let data = this.state.planets;
     this.setState({dataToDisplay: data})
   }

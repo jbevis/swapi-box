@@ -96,7 +96,7 @@ button {
   margin: 20px;
 }
 
-button:focus {
+button:hover {
   background-color: #16448e;
   border-top-color: #ffffff;
   border-right-color: #d1a849;

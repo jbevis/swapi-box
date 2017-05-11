@@ -74,6 +74,9 @@ export default class App extends Component {
 
   handleClickFaves() {
     let data = this.state.favorites;
+    if (Object.keys(data).length === 0) {
+      alert('Sorry, no favorites selected yet!')
+    }
     this.setState({dataToDisplay: data})
   }
 
@@ -114,7 +117,6 @@ export default class App extends Component {
       }, {})
 
       this.setState({favorites: remainingFaveObjs});
-      this.setState({dataToDisplay: remainingFaveObjs});
     }
   }
 

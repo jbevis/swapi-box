@@ -25,5 +25,4 @@ const { string, func } = React.PropTypes
 Button.propTypes = {
   name: string.isRequired,
   onClick: func.isRequired,
-  counter: string.isRequired
 }

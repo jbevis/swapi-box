@@ -111,6 +111,14 @@ button:hover {
   border-left-color: #ffffff;
 }
 
+/*.active {
+  background-color: #1f63d1;
+  border-top-color: #ffffff;
+  border-right-color: #d1a849;
+  border-bottom-color: #d1a849;
+  border-left-color: #ffffff;
+}*/
+
 .card-grid {
   display: flex;
   flex-wrap: wrap;

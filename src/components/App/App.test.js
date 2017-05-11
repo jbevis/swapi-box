@@ -7,10 +7,10 @@ import { mockedCrawl, mockedPeople, mockedPlanets, mockedVehicles, mockedHomewor
 
 const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve('success')}, 3000)
+    resolve('success')}, 5000)
 })
 
-describe.skip('App --> shallow mounts', () => {
+describe('App --> shallow mounts', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -25,7 +25,7 @@ describe.skip('App --> shallow mounts', () => {
   });
 });
 
-describe.skip('App --> mount',() => {
+describe('App --> mount',() => {
 
   beforeEach(() => {
     fetchMock.get('http://www.swapi.co/api/films', {
@@ -72,11 +72,10 @@ describe.skip('App --> mount',() => {
 
   it('after page load, renders app', async () => {
     const wrapper = mount(<App />)
-    const found = wrapper.find(".App-header")
+    const found = wrapper.find("h2")
 
     await promise;
-    console.log(found)
-    expect(found.length).toBe(1)
+    expect(found.text()).toBe('SWAPI-Box')
   })
 
 

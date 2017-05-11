@@ -5,8 +5,11 @@ export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
     let favoriteClass = '';
     if (Object.keys(favoritesData).includes(key)) {
       favoriteClass = 'favorite';
+    } else {
+      favoriteClass = 'unfavorite'
     }
     return favoriteClass;
+
   };
 
   return(
@@ -42,4 +45,14 @@ export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
       })}
     </div>
   )
+}
+
+const { string, func, object } = React.PropTypes
+Card.propTypes = {
+  key: string.isRequired,
+  id: string.isRequired,
+  data: object.isRequired,
+  keyName: string.isRequired,
+  faveClick: func.isRequired,
+  favoritesData: object.isRequired
 }

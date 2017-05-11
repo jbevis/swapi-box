@@ -13,11 +13,13 @@ const mockedData = {  Luke: { name: 'Luke',
                                population: '200000' }
                     }
 
+const mockFn = jest.fn()
+
 describe('CardGrid --> Shallow mount tests', () => {
   let shallowWrapper;
 
   beforeEach(() => {
-    shallowWrapper = shallow(<CardGrid data={mockedData}/>)
+    shallowWrapper = shallow(<CardGrid data={mockedData} favorites={mockedData} faveClick={mockFn}/>)
   })
 
   it('renders without crashing', () => {
@@ -35,9 +37,16 @@ describe('CardGrid --> Shallow mount tests', () => {
 describe('CardGrid --> Mount tests', () => {
 
   it('renders appropriate number of cards, based on data in props', () => {
-    const wrapper = mount(<CardGrid data={mockedData} />)
+    const wrapper = mount(<CardGrid data={mockedData} favorites={mockedData} faveClick={mockFn} />)
     const found = wrapper.find('.card')
 
-    expect(found).toHaveLength(2)
+    expect(found.length).toBe(2)
   })
 })
+
+const { func, object } = React.PropTypes
+CardGrid.propTypes = {
+  data: object.isRequired,
+  faveClick: func.isRequired,
+  favorites: object.isRequired
+}

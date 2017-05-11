@@ -11,7 +11,7 @@ export const Scroller = ({ crawlText }) => {
       return (
         <div>
           <p>{randomMovie.text}</p>
-          <p>{randomMovie.title}</p>
+          <p className='scroller-title'>{randomMovie.title}</p>
           <p>{randomMovie.year}</p>
         </div>
       )

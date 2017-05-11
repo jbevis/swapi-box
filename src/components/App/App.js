@@ -83,8 +83,6 @@ export default class App extends Component {
   }
 
   handleClickPlanets() {
-    console.log('clicked')
-    console.log(this.state.planets)
     let data = this.state.planets;
     this.setState({dataToDisplay: data})
   }
@@ -126,7 +124,10 @@ export default class App extends Component {
           !Object.keys(this.state.vehicles).length ||
           !this.state.movieCrawls.length ){
       return (
-        <div className='loading-message'>Loading, please wait</div>
+        <div className='loading-message'>
+          <img className='loading-image' src='https://starwars.recast.ai/static/media/BB8.5c268a03.gif' alt='bb-8 rolling across a desert'/>
+          <h2 className='loading-text'>Loading...</h2>
+        </div>
       )
     } else {
     return (
@@ -141,19 +142,21 @@ export default class App extends Component {
           <article className='scroller'>
             <Scroller crawlText={this.state.movieCrawls}/>
           </article>
-          <article className='buttons'>
-            <Button name='people'
-                    onClick={this.handleClickPeople.bind(this)}
-                    counter='none' />
-            <Button name='planets'
-                    onClick={this.handleClickPlanets.bind(this)}
-                    counter='none' />
-            <Button name='vehicles'
-                    onClick={this.handleClickVehicles.bind(this)}
-                    counter='none' />
+          <article className='button-cards-holder'>
+            <article className='buttons'>
+              <Button name='people'
+                      onClick={this.handleClickPeople.bind(this)}
+                      counter='none' />
+              <Button name='planets'
+                      onClick={this.handleClickPlanets.bind(this)}
+                      counter='none' />
+              <Button name='vehicles'
+                      onClick={this.handleClickVehicles.bind(this)}
+                      counter='none' />
+            </article>
+            <CardGrid data={this.state.dataToDisplay}
+                      faveClick={this.handleAddFaves.bind(this)}/>
           </article>
-          <CardGrid data={this.state.dataToDisplay}
-                    faveClick={this.handleAddFaves.bind(this)}/>
         </section>
       </main>
     );

@@ -132,4 +132,47 @@ describe('App --> mount',() => {
 
     expect(wrapper.find('button').length).toBe(4);
   })
+
+  it('renders people cards to the DOM', async () => {
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    const peopleBtn = wrapper.find('.people')
+
+    peopleBtn.simulate('click')
+    expect(wrapper.find('.card').length).toBe(1)
+  })
+
+  it('renders planets cards to the DOM', async () => {
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    const planetsBtn = wrapper.find('.planets')
+
+    planetsBtn.simulate('click')
+    expect(wrapper.find('.card').length).toBe(1)
+  })
+
+  it('renders favorites to DOM', async () => {
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    const planetsBtn = wrapper.find('.planets')
+    planetsBtn.simulate('click')
+
+    const markFaveBtn = wrapper.find('.markFavorite')
+    const faveBtn = wrapper.find('.Favorites')
+
+    markFaveBtn.simulate('click')
+    faveBtn.simulate('click')
+
+    expect(wrapper.find('p').length).toB
+  })
+
+
+
+
 })

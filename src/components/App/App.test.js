@@ -169,7 +169,33 @@ describe('App --> mount',() => {
     markFaveBtn.simulate('click')
     faveBtn.simulate('click')
 
-    expect(wrapper.find('p').length).toB
+    expect(wrapper.find('p').length).toBe(7)
+  })
+
+  it('should be able to unfavorite a card, and it reflects in state', async () => {
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    const peopleBtn = wrapper.find('.people')
+    const planetsBtn = wrapper.find('.planets')
+    const faveBtn = wrapper.find('.Favorites')
+
+    peopleBtn.simulate('click')
+
+    const markFaveBtn = wrapper.find('.markFavorite')
+
+    markFaveBtn.simulate('click')
+
+    planetsBtn.simulate('click')
+
+    markFaveBtn.simulate('click')
+
+    markFaveBtn.simulate('click')
+
+    faveBtn.simulate('click')
+
+    expect(wrapper.find('p').length).toBe(7)
   })
 
 

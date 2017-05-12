@@ -4,69 +4,86 @@ import fetchMock from 'fetch-mock'
 import { crawlCleaner, peopleCleaner, planetCleaner, vehicleCleaner } from './dataCleaners';
 import { mockedCrawl, mockedPeople, mockedPlanets, mockedVehicles, mockedHomeworld, mockedSpecies, mockedPerson} from './mockedData'
 
-describe('dataCleaners', () => {
+describe('movieCrawls cleaner', () => {
+  const cleanedCrawls = crawlCleaner(mockedCrawl)
 
-  afterEach(() => {
-    expect(fetchMock.calls().unmatched).toEqual([]);
-    fetchMock.restore()
+  it('crawlCleaner should be a function', () => {
+
+    expect(typeof crawlCleaner).toBe('function');
   })
 
-  it('crawlCleaner returns an array', () => {
+  it('crawlCleaner should return an array', () => {
 
-    let cleanedData = crawlCleaner(mockedCrawl);
-
-    expect(Object.keys(cleanedData)).toThrow();
-    expect(cleanedData.length).toEqual(1);
+    expect(typeof cleanedCrawls).toBe('object');
   })
 
-  it('crawlCleaner returns an array with text, title, year', () => {
-    const expectedData = [{text: 'string', title: 'A New Hope', year: '1977-05-25'}]
-    let cleanedData = crawlCleaner(mockedCrawl);
+  it('should have the correct number of film data in the array', () => {
 
-    expect(cleanedData).toEqual(expectedData);
+    expect(cleanedCrawls.length).toBe(1)
+    expect(cleanedCrawls[0].title).toBe('A New Hope')
+  })
+})
+
+describe('people cleaner', () => {
+  const cleanedPeople= peopleCleaner(mockedPeople)
+
+  it('peopleCleaner should be a function', () => {
+
+    expect(typeof peopleCleaner).toBe('function');
   })
 
-  it('peopleCleaner returns an object', () => {
-    let cleanedData = peopleCleaner(mockedPeople);
+  it('peopleCleaner should return an object', () => {
 
-    expect(typeof cleanedData).toEqual('object');
+    expect(typeof cleanedPeople).toBe('object');
   })
 
   it('peopleCleaner returns an object with keys of persons name', () => {
     let cleanedData = peopleCleaner(mockedPeople)
     let expectedKeys = ['Luke Skywalker']
 
-    expect(Object.keys(cleanedData)).toThrow();
     expect(Object.keys(cleanedData).length).toEqual(1);
     expect(Object.keys(cleanedData)).toEqual(expectedKeys)
   })
+})
 
-  it.skip('peopleCleaner: for each key, there is an object that returns name, homeworld, species, population', () => {
-    fetchMock.get('http://swapi.co/api/planets/1/', {status: 200, body: mockedHomeworld}).catch('error')
-    fetchMock.get('http://swapi.co/api/planets/1/', {status: 200, body: mockedHomeworld}).catch('error')
-    fetchMock.get('http://swapi.co/api/species/1/', {status: 200, body: mockedSpecies}).catch('error')
+describe('planets cleaner', () => {
+  const cleanedPlanets= planetCleaner(mockedPlanets)
 
+  it('planetCleaner should be a function', () => {
 
-    let cleanedData = peopleCleaner(mockedPerson)
-    let expected = ['name', 'homeworld', 'species', 'population']
-
-    expect(Object.keys(cleanedData['Luke Skywalker'])).toEqual(expected)
+    expect(typeof planetCleaner).toBe('function');
   })
 
-  it.skip('planetCleaner: for each key, there is an object that returns name, terrain, population, and residents', () => {
-    fetchMock.get('http://swapi.co/people/1/', {status: 200, body: mockedPerson}).catch('error')
+  it('planetCleaner should return an object', () => {
 
-    let cleanedData = planetCleaner(mockedPlanets);
-    let received = Object.keys(cleanedData['Alderaan']);
-    let expected = ['name', 'terrain', 'population', 'residents'];
-
-    expect(received).toEqual(expected)
+    expect(typeof cleanedPlanets).toBe('object');
   })
 
-  it('vehicleCleaner: for each key, there is an object that returns name, model, class, and passengers', () => {
-    let cleanedData = vehicleCleaner(mockedVehicles);
-    let expected = {'Sand Crawler': {name: 'Sand Crawler', model:'Digger Crawler', class:'wheeled', passengers:'30'}}
+  it('planetCleaner returns an object with keys of planets names', () => {
+    let expected = ['Alderaan']
 
-    expect(cleanedData).toEqual(expected);
+    expect(Object.keys(cleanedPlanets).length).toEqual(1);
+    expect(Object.keys(cleanedPlanets)).toEqual(expected)
+  })
+})
+
+describe('vehicles cleaner', () => {
+  const cleanedVehicles = vehicleCleaner(mockedVehicles)
+
+  it('vehicleCleaner should be a function', () => {
+
+    expect(typeof vehicleCleaner).toBe('function');
+  })
+
+  it('vehicleCleaner should return an object', () => {
+
+    expect(typeof cleanedVehicles).toBe('object');
+  })
+
+  it('vehicleCleaner returns an object with keys of planets names', () => {
+    let expected = ['Sand Crawler']
+
+    expect(Object.keys(cleanedVehicles).length).toEqual(1);
+    expect(Object.keys(cleanedVehicles)).toEqual(expected)
   })
 })

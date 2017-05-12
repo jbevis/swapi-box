@@ -49,8 +49,8 @@ export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
 }
 
 Card.propTypes = {
-  key: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  key: PropTypes.string,
+  id: PropTypes.number,
   data: PropTypes.object.isRequired,
   keyName: PropTypes.string.isRequired,
   faveClick: PropTypes.func.isRequired,

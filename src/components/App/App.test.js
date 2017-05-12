@@ -169,7 +169,7 @@ describe('App --> mount',() => {
     markFaveBtn.simulate('click')
     faveBtn.simulate('click')
 
-    expect(wrapper.find('p').length).toBe(7)
+    expect(wrapper.find('p').length).toB
   })
 
 

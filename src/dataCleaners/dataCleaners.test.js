@@ -16,11 +16,11 @@ describe('dataCleaners', () => {
     let cleanedData = crawlCleaner(mockedCrawl);
 
     expect(Object.keys(cleanedData)).toThrow();
-    expect(cleanedData.length).toEqual(2);
+    expect(cleanedData.length).toEqual(1);
   })
 
   it('crawlCleaner returns an array with text, title, year', () => {
-    const expectedData = [{text: 'string', title: 'A New Hope', year: '1977-05-25'}, {text: 'string', title: 'Attack of the Clones', year: '2002-05-16'}]
+    const expectedData = [{text: 'string', title: 'A New Hope', year: '1977-05-25'}]
     let cleanedData = crawlCleaner(mockedCrawl);
 
     expect(cleanedData).toEqual(expectedData);

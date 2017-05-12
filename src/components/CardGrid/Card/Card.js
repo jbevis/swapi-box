@@ -4,9 +4,9 @@ export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
   const checkIfFavorited = (key) => {
     let favoriteClass = '';
     if (Object.keys(favoritesData).includes(key)) {
-      favoriteClass = 'favorite';
+      favoriteClass = 'favorite markFavorite';
     } else {
-      favoriteClass = 'unfavorite'
+      favoriteClass = 'markFavorite'
     }
     return favoriteClass;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const Scroller = ({ crawlText }) => {
   const pickRandomFilm = (array) => {
@@ -25,7 +26,6 @@ export const Scroller = ({ crawlText }) => {
   )
 }
 
-const { array } = React.PropTypes
 Scroller.propTypes = {
-  crawlText: array.isRequired
+  crawlText: PropTypes.array.isRequired
 }

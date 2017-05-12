@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card } from './Card/Card';
+import PropTypes from 'prop-types';
+
 
 export const CardGrid = ({ data = {}, faveClick, favorites }) => {
   if (Object.keys(data).length) {
@@ -25,4 +27,10 @@ export const CardGrid = ({ data = {}, faveClick, favorites }) => {
       </section>
     )
   }
+}
+
+CardGrid.propTypes = {
+  data: PropTypes.object.isRequired,
+  faveClick: PropTypes.func.isRequired,
+  favorites: PropTypes.object.isRequired
 }

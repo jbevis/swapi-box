@@ -5,12 +5,50 @@ import fetchMock from 'fetch-mock'
 import App from './App';
 import { mockedCrawl, mockedPeople, mockedPlanets, mockedVehicles, mockedHomeworld, mockedSpecies, mockedPerson} from '../../dataCleaners/mockedData'
 
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve('success')}, 5000)
-})
 
 describe('App --> shallow mounts', () => {
+
+  beforeEach(() => {
+    fetchMock.get('http://www.swapi.co/api/films', {
+      status: 200,
+      body: mockedCrawl
+    }).catch('error')
+
+    fetchMock.get('http://www.swapi.co/api/people', {
+      status: 200,
+      body: mockedPeople
+    })
+
+    fetchMock.get('http://www.swapi.co/api/planets', {
+      status: 200,
+      body: mockedPlanets
+    })
+
+    fetchMock.get('http://www.swapi.co/api/vehicles', {
+      status: 200,
+      body: mockedVehicles
+    })
+
+    fetchMock.get('http://swapi.co/api/planets/1/', {
+      status: 200,
+      body: mockedHomeworld
+    })
+
+    fetchMock.get('http://swapi.co/api/species/1/', {
+      status: 200,
+      body: mockedSpecies
+    })
+
+    fetchMock.get('http://swapi.co/api/people/1/', {
+      status: 200,
+      body: mockedPerson
+    })
+  })
+
+  afterEach(() => {
+    expect(fetchMock.calls().unmatched).toEqual([]);
+    fetchMock.restore()
+  })
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -26,60 +64,72 @@ describe('App --> shallow mounts', () => {
 });
 
 describe('App --> mount',() => {
+  const resolveAfter2Seconds = () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  }
 
   beforeEach(() => {
     fetchMock.get('http://www.swapi.co/api/films', {
       status: 200,
-      body: mockedCrawl,
-      throws: 'rejected'
+      body: mockedCrawl
     }).catch('error')
+
     fetchMock.get('http://www.swapi.co/api/people', {
       status: 200,
-      body: mockedPeople,
-      throws: 'rejected'
+      body: mockedPeople
     })
+
     fetchMock.get('http://www.swapi.co/api/planets', {
       status: 200,
-      body: mockedPlanets,
-      throws: 'rejected'
+      body: mockedPlanets
     })
+
     fetchMock.get('http://www.swapi.co/api/vehicles', {
       status: 200,
-      body: mockedVehicles,
-      throws: 'rejected'
+      body: mockedVehicles
     })
+
     fetchMock.get('http://swapi.co/api/planets/1/', {
       status: 200,
-      body: mockedHomeworld,
-      throws: 'rejected'
+      body: mockedHomeworld
     })
+
     fetchMock.get('http://swapi.co/api/species/1/', {
       status: 200,
-      body: mockedSpecies,
-      throws: 'rejected'
+      body: mockedSpecies
     })
+
     fetchMock.get('http://swapi.co/api/people/1/', {
       status: 200,
-      body: mockedPerson,
-      throws: 'rejected'
+      body: mockedPerson
     })
-  });
+  })
 
   afterEach(() => {
-    fetchMock.restore()
     expect(fetchMock.calls().unmatched).toEqual([]);
+    fetchMock.restore()
   })
 
   it('after page load, renders app', async () => {
-    const wrapper = mount(<App />)
-    const found = wrapper.find("h2")
 
-    await promise;
-    expect(found.text()).toBe('SWAPI-Box')
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    expect(Object.keys(wrapper.state()).length)
+    expect(wrapper.find('.App-header').length).toBe(1);
   })
 
+  it('after page load, renders all 4 Button components', async () => {
 
-  // it('should display a randomly selected opening crawl', () => {
-  //   expect(mountWrapper.find('.crawl').length).toEqual(1)
-  // })
+    const wrapper = mount(<App />)
+
+    await resolveAfter2Seconds();
+
+    expect(wrapper.find('button').length).toBe(4);
+  })
 })

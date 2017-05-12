@@ -19,57 +19,48 @@ export default class App extends Component {
     }
   }
 
-  setCrawlState(dataObj) {
-    let cleanCrawlData = crawlCleaner(dataObj);
-    this.setState({movieCrawls: cleanCrawlData})
-  }
+  fetchPromise() {
+    const movies = fetch('http://www.swapi.co/api/films')
+          .then((resp) => resp.json())
+          .then((films) => {
+            return crawlCleaner(films)
+          })
+          .catch((error) => {
+            alert('film api busted')
+          })
 
-  setPeopleState(dataObj) {
-    let cleanPeopleData = peopleCleaner(dataObj);
-    this.setState({people: cleanPeopleData});
-  }
+    const people = fetch('http://www.swapi.co/api/people')
+      .then(resp => resp.json())
+      .then((people) => {
+        return peopleCleaner(people)
+      })
 
-  setPlanetState(dataObj) {
-    let cleanPlanetData = planetCleaner(dataObj);
-    this.setState({planets: cleanPlanetData});
-  }
+    const planets = fetch('http://www.swapi.co/api/planets')
+      .then((resp) => resp.json())
+      .then((planets) => {
+        return planetCleaner(planets)
+      })
 
-  setVehicleState(dataObj) {
-    let cleanVehicleData = vehicleCleaner(dataObj);
-    this.setState({vehicles: cleanVehicleData});
+    const vehicles = fetch('http://www.swapi.co/api/vehicles')
+      .then((resp) => resp.json())
+      .then((vehicles) => {
+        return vehicleCleaner(vehicles)
+      })
+
+    return Promise.all([movies, people, planets, vehicles]).catch(() => console.log('Promise.all error'))
   }
 
   componentDidMount() {
-    const filmApi = 'http://www.swapi.co/api/films';
-    fetch(filmApi)
-      .then((resp) => resp.json())
-      .then((films) => {
-        this.setCrawlState(films)
+    this.fetchPromise()
+      .then((promises) => {
+        this.setState({
+          movieCrawls: promises[0],
+          people: promises[1],
+          planets: promises[2],
+          vehicles: promises[3]
+        })
       })
-      .catch((error) => {
-        alert('film api busted')
-      })
-
-    const peopleApi = 'http://www.swapi.co/api/people';
-    fetch(peopleApi)
-      .then(resp => resp.json())
-      .then((people) => {
-        this.setPeopleState(people)
-      })
-
-    const planetApi = 'http://www.swapi.co/api/planets';
-    fetch(planetApi)
-      .then((resp) => resp.json())
-      .then((planets) => {
-        this.setPlanetState(planets)
-      })
-
-    const vehicleApi = 'http://www.swapi.co/api/vehicles';
-    fetch(vehicleApi)
-      .then((resp) => resp.json())
-      .then((vehicles) => {
-        this.setVehicleState(vehicles)
-      })
+    console.log('state set and app mounted!');
   }
 
   handleClickFaves() {

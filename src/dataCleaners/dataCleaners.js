@@ -15,17 +15,19 @@ export const peopleCleaner = (obj) => {
       fetch(person.homeworld)
         .then(resp => resp.json())
         .then(world => acc[person.name].homeworld = world.name)
-        .catch(() => 'error')
+        .catch(() => console.log('people homeworld call error'))
 
       fetch(person.homeworld)
         .then(resp => resp.json())
         .then(world => acc[person.name].population = world.population)
-        .catch(() => 'error')
+        .catch(() => console.log('people population call error'))
 
       fetch(person.species)
         .then(resp => resp.json())
-        .then(species => acc[person.name].species = species.name)
-        .catch(() => 'error')
+        .then(species =>
+          acc[person.name].species = species.name
+        )
+        .catch(() => console.log('people species call error'))
     }
     return acc
   }, {})
@@ -48,7 +50,7 @@ export const planetCleaner = (obj) => {
             .then(resp => resp.json())
             .then(resident => {
               acc[planet.name].residents.push(resident.name)})
-            .catch(() => 'error')
+            .catch((error) => 'planet resident inner call error')
         })
       }
     }

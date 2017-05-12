@@ -43,10 +43,3 @@ describe('CardGrid --> Mount tests', () => {
     expect(found.length).toBe(2)
   })
 })
-
-const { func, object } = React.PropTypes
-CardGrid.propTypes = {
-  data: object.isRequired,
-  faveClick: func.isRequired,
-  favorites: object.isRequired
-}

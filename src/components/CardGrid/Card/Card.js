@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
   const checkIfFavorited = (key) => {
@@ -47,12 +48,11 @@ export const Card = ({ id, data, keyName, faveClick, favoritesData }) => {
   )
 }
 
-const { string, func, object } = React.PropTypes
 Card.propTypes = {
-  key: string.isRequired,
-  id: string.isRequired,
-  data: object.isRequired,
-  keyName: string.isRequired,
-  faveClick: func.isRequired,
-  favoritesData: object.isRequired
+  key: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  keyName: PropTypes.string.isRequired,
+  faveClick: PropTypes.func.isRequired,
+  favoritesData: PropTypes.object.isRequired
 }
